@@ -127,7 +127,7 @@ class YfData(metaclass=SingletonMeta):
         if cookie_dict is None:
             return False
         # Periodically refresh, 24 hours seems fair.
-        if cookie_dict['age'] > datetime.timedelta(days=0):
+        if cookie_dict['age'] > datetime.timedelta(days=1):
             return False
         self._session.cookies.update(cookie_dict['cookie'])
         utils.get_yf_logger().debug('loaded persistent cookie')

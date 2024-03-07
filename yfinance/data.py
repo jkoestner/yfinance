@@ -127,7 +127,7 @@ class YfData(metaclass=SingletonMeta):
         if cookie_dict is None:
             return False
         # Periodically refresh, 24 hours seems fair.
-        if cookie_dict['age'] > datetime.timedelta(days=1):
+        if cookie_dict['age'] > datetime.timedelta(days=0):
             return False
         self._session.cookies.update(cookie_dict['cookie'])
         utils.get_yf_logger().debug('loaded persistent cookie')
@@ -160,7 +160,7 @@ class YfData(metaclass=SingletonMeta):
         # To avoid infinite recursion, do NOT use self.get()
         # - 'allow_redirects' copied from @psychoz971 solution - does it help USA?
         response = self._session.get(
-            url='https://fc.yahoo.com',
+            url='https://guce.yahoo.com/consent',
             headers=self.user_agent_headers,
             proxies=proxy,
             timeout=timeout,
